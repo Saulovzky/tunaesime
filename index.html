@@ -39,6 +39,20 @@
 .pl-ctrl button.pl-p{width:56px;height:56px;border-radius:50%}
 .pl-ctrl button.pl-s svg{width:20px;height:20px}
 .pl-ctrl button.pl-p svg{width:28px;height:28px}
+
+.act-grid{display:grid;gap:1.75rem;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),440px))}
+.act-card{background:rgb(var(--c-cardinal));border:1px solid rgb(0 0 0/.12);border-radius:14px;overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,.08)}
+.act-vid{position:relative;aspect-ratio:16/9;background:#000;display:block;width:100%;border:0;padding:0;cursor:pointer}
+.act-vid img,.act-vid iframe{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0}
+.act-vid .act-play{position:absolute;inset:0;margin:auto;width:60px;height:60px;border-radius:50%;background:#f8faf8;color:#090a09;display:flex;align-items:center;justify-content:center;transition:transform .2s,background .2s,color .2s;box-shadow:0 0 30px rgba(0,0,0,.4)}
+.act-vid:hover .act-play{transform:scale(1.1);background:#005a2b;color:#fff}
+.act-vid::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 55%,rgba(0,0,0,.45));pointer-events:none}
+.act-vid.on::after{display:none}
+.act-info{padding:16px 18px 18px}
+.act-info h3{font-family:"Cormorant Garamond",Georgia,serif;font-size:1.5rem;line-height:1.15;font-weight:500;color:rgb(var(--c-ivory));margin:0 0 4px}
+.act-info p{margin:0;font:11px/1.5 "Space Mono",monospace;letter-spacing:.08em;color:rgb(var(--c-silver))}
+.act-info a{display:inline-block;margin-top:10px;font:11px/1 "Space Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:#007838}
+.act-info a:hover{color:rgb(var(--c-ivory))}
 </style>
 </head>
 <body class="bg-obsidian text-parchment font-sans antialiased selection:bg-flag-green selection:text-white overflow-x-hidden">
@@ -364,7 +378,18 @@
 </section>
 
 <!-- PRESENTACIONES E INGRESO -->
-<section class="py-24 bg-charcoal hairline-b relative" id="presentaciones">
+<!-- ÚLTIMAS ACTIVIDADES -->
+<section class="py-24 bg-charcoal hairline-b relative" id="actividades">
+<div class="max-w-7xl mx-auto px-6">
+<div class="mb-12">
+<span class="text-xs font-mono tracking-[0.3em] text-flag-green uppercase block mb-3 font-semibold">AL DÍA</span>
+<h2 class="font-serif text-4xl sm:text-6xl text-ivory font-normal tracking-tight">Últimas actividades relevantes</h2>
+</div>
+<div class="act-grid" id="act-grid"></div>
+</div>
+</section>
+
+<section class="py-24 bg-obsidian hairline-b relative" id="presentaciones">
 <div class="max-w-7xl mx-auto px-6">
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
 <div class="lg:col-span-7 flex flex-col justify-between p-8 sm:p-10 rounded-2xl bg-cardinal hairline-border shadow-xl">
@@ -403,7 +428,7 @@
 </section>
 
 <!-- CONTACTO -->
-<section class="py-28 bg-obsidian hairline-b relative" id="contacto">
+<section class="py-28 bg-charcoal hairline-b relative" id="contacto">
 <div class="max-w-7xl mx-auto px-6">
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
 <div class="lg:col-span-6 flex flex-col justify-between">
@@ -635,6 +660,14 @@ window.TUNA = {
   ],
 
   /* ---------- CORREO PARA EL FORMULARIO DE CONTRATACIÓN ---------- */
+  /* ---------- ÚLTIMAS ACTIVIDADES RELEVANTES ----------
+     Cada una es un mini video de YouTube. "inicio" = segundo donde arranca (4:21 = 261).
+     "texto" (opcional) es una línea corta bajo el título. */
+  actividades: [
+    { id: "6E8wfUfs6WM", titulo: "TESIMEZ Europa 2026", inicio: 261 }
+    // { id: "OTRO_ID", titulo: "Nombre de la actividad", inicio: 0, texto: "Una línea breve" },
+  ],
+
   correo: "tesimez.oficial@gmail.com",
 
   /* ---------- GOOGLE SHEETS (opcional) ----------
@@ -1101,6 +1134,39 @@ window.__iniciar = function (D) {
   document.addEventListener("keydown",function(e){if(e.key==="Escape")abrir(false);});
   function cuenta(){var n=panel.children.length;txt.textContent=n?"Ver las "+n+" canciones":"Elegir canción";}
   new MutationObserver(cuenta).observe(panel,{childList:true});cuenta();
+})();
+</script>
+<script>
+/* últimas actividades: mini videos (datos en window.TUNA.actividades) */
+(function(){
+  var g=document.getElementById("act-grid"),sec=document.getElementById("actividades");
+  function pintar(){
+    var D=window.TUNA||{},A=D.actividades||[];
+    if(!A.length){sec.style.display="none";return;}
+    A.forEach(function(a){
+      if(!a.id)return;
+      var card=document.createElement("div");card.className="act-card";
+      var v=document.createElement("button");v.type="button";v.className="act-vid";v.setAttribute("aria-label","Reproducir: "+(a.titulo||"video"));
+      var im=document.createElement("img");im.alt="";im.loading="lazy";im.src="https://i.ytimg.com/vi/"+a.id+"/hqdefault.jpg";
+      var p=document.createElement("span");p.className="act-play";
+      p.innerHTML='<svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+      v.appendChild(im);v.appendChild(p);
+      v.addEventListener("click",function(){
+        var au=document.getElementById("audio");if(au&&!au.paused)au.pause();
+        var f=document.createElement("iframe");
+        f.src="https://www.youtube-nocookie.com/embed/"+a.id+"?autoplay=1&rel=0"+(a.inicio?"&start="+(parseInt(a.inicio,10)||0):"");
+        f.title=a.titulo||"Video";f.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";f.allowFullscreen=true;
+        v.innerHTML="";v.classList.add("on");v.appendChild(f);
+      });
+      var info=document.createElement("div");info.className="act-info";
+      var h3=document.createElement("h3");h3.textContent=a.titulo||"Actividad";info.appendChild(h3);
+      if(a.texto){var pp=document.createElement("p");pp.textContent=a.texto;info.appendChild(pp);}
+      var l=document.createElement("a");l.href="https://www.youtube.com/watch?v="+a.id+(a.inicio?"&t="+(parseInt(a.inicio,10)||0)+"s":"");l.target="_blank";l.rel="noopener noreferrer";l.textContent="Ver en YouTube ↗";info.appendChild(l);
+      card.appendChild(v);card.appendChild(info);g.appendChild(card);
+    });
+  }
+  /* espera a que contenido.json (si existe) termine de cargar */
+  var t=0;(function esperar(){ if(window.__hecho||t++>50)return pintar(); setTimeout(esperar,100); })();
 })();
 </script>
 </body></html>
