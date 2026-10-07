@@ -119,9 +119,11 @@ aside[aria-label="Aviso institucional"] *{font-size:11px!important;letter-spacin
 .conv-fig img{max-height:calc(100dvh - 150px);width:auto;max-width:92vw;border-radius:8px}
 .conv-cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 30px;border-radius:99px;background:#005a2b;color:#fff;font:700 13px/1 "Space Mono",monospace;letter-spacing:.16em;text-transform:uppercase;box-shadow:0 8px 24px rgba(0,0,0,.4)}
 .conv-cta:hover{background:#007838}
-.firma{display:flex;align-items:center;justify-content:center;gap:10px;padding-top:28px;opacity:.85}
-.firma-txt{font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#fff;font-weight:700}
-.firma-ico{width:40px;height:auto;image-rendering:pixelated;flex:none}
+.firma{text-decoration:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;padding-top:28px;opacity:.85}
+.firma-txt{font-family:"Space Mono",monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#fff;font-weight:700}
+.firma.toca .firma-ico{animation:camp .9s ease-in-out}
+@keyframes camp{0%,100%{transform:rotate(0)}20%{transform:rotate(-12deg)}45%{transform:rotate(10deg)}70%{transform:rotate(-5deg)}}
+.firma-ico{width:26px;height:auto;image-rendering:pixelated;flex:none}
 .firma:hover{opacity:1}
 </style>
 </head>
@@ -623,7 +625,7 @@ aside[aria-label="Aviso institucional"] *{font-size:11px!important;letter-spacin
         </p>
 <span class="text-silver/30 shrink-0">IPN • 2003–2025</span>
 </div>
-<div class="firma"><span class="firma-txt">Hecho por Cuasimodo</span><svg class="firma-ico" viewBox="0 0 28 33" width="28" height="33" aria-hidden="true" shape-rendering="crispEdges"><path fill="#fff" d="M4 1h6v1h-6zM13 1h1v1h-1zM15 1h1v1h-1zM17 1h1v1h-1zM2 2h10v1h-10zM13 2h7v1h-7zM1 3h21v1h-21zM0 4h23v1h-23zM0 5h24v1h-24zM0 6h17v1h-17zM18 6h8v1h-8zM0 7h27v1h-27zM1 8h25v1h-25zM1 9h15v1h-15zM17 9h8v1h-8zM2 10h22v1h-22zM2 11h16v1h-16zM19 11h4v1h-4zM2 12h17v1h-17zM20 12h2v1h-2zM3 13h18v1h-18zM3 14h20v1h-20zM4 15h20v1h-20zM4 16h12v1h-12zM17 16h9v1h-9zM5 17h11v1h-11zM17 17h4v1h-4zM22 17h5v1h-5zM5 18h16v1h-16zM23 18h4v1h-4zM5 19h12v1h-12zM24 19h2v1h-2zM5 20h12v1h-12zM5 21h12v1h-12zM4 22h14v1h-14zM4 23h14v1h-14zM4 24h14v1h-14zM5 25h6v1h-6zM13 25h5v1h-5zM5 26h6v1h-6zM13 26h5v1h-5zM5 27h5v1h-5zM13 27h5v1h-5zM5 28h5v1h-5zM13 28h5v1h-5zM4 29h6v1h-6zM13 29h5v1h-5zM4 30h6v1h-6zM13 30h5v1h-5zM3 31h7v1h-7zM13 31h6v1h-6zM2 32h8v1h-8zM13 32h7v1h-7z"/></svg></div>
+<a class="firma" id="firma" href="https://www.linkedin.com/in/saul-salas-fabricacion-digital/" target="_blank" rel="noopener noreferrer" aria-label="Hecho por Cuasimodo, abre LinkedIn en una pestaña nueva"><span class="firma-txt">Hecho por Cuasimodo</span><svg class="firma-ico" viewBox="0 0 28 33" width="28" height="33" aria-hidden="true" shape-rendering="crispEdges"><path fill="#fff" d="M4 1h6v1h-6zM13 1h1v1h-1zM15 1h1v1h-1zM17 1h1v1h-1zM2 2h10v1h-10zM13 2h7v1h-7zM1 3h21v1h-21zM0 4h23v1h-23zM0 5h24v1h-24zM0 6h17v1h-17zM18 6h8v1h-8zM0 7h27v1h-27zM1 8h25v1h-25zM1 9h15v1h-15zM17 9h8v1h-8zM2 10h22v1h-22zM2 11h16v1h-16zM19 11h4v1h-4zM2 12h17v1h-17zM20 12h2v1h-2zM3 13h18v1h-18zM3 14h20v1h-20zM4 15h20v1h-20zM4 16h12v1h-12zM17 16h9v1h-9zM5 17h11v1h-11zM17 17h4v1h-4zM22 17h5v1h-5zM5 18h16v1h-16zM23 18h4v1h-4zM5 19h12v1h-12zM24 19h2v1h-2zM5 20h12v1h-12zM5 21h12v1h-12zM4 22h14v1h-14zM4 23h14v1h-14zM4 24h14v1h-14zM5 25h6v1h-6zM13 25h5v1h-5zM5 26h6v1h-6zM13 26h5v1h-5zM5 27h5v1h-5zM13 27h5v1h-5zM5 28h5v1h-5zM13 28h5v1h-5zM4 29h6v1h-6zM13 29h5v1h-5zM4 30h6v1h-6zM13 30h5v1h-5zM3 31h7v1h-7zM13 31h6v1h-6zM2 32h8v1h-8zM13 32h7v1h-7z"/></svg></a>
 </div>
 </footer>
 
@@ -1303,6 +1305,15 @@ window.__iniciar = function (D) {
   b.addEventListener("click",function(){if(d.showModal)d.showModal();else d.setAttribute("open","");});
   c.addEventListener("click",function(){d.close();});
   d.addEventListener("click",function(e){if(e.target===d||e.target.classList.contains("conv-caja"))d.close();});
+})();
+</script>
+<script>
+(function(){var a=document.getElementById("firma");if(!a)return;var ctx;
+function campana(){try{ctx=ctx||new(window.AudioContext||window.webkitAudioContext)();if(ctx.state==="suspended")ctx.resume();
+var t=ctx.currentTime,m=ctx.createGain();m.gain.value=.22;m.connect(ctx.destination);
+[[1,1],[2,.55],[2.76,.5],[5.4,.28],[8.93,.14]].forEach(function(p){var o=ctx.createOscillator(),g=ctx.createGain();o.type="sine";o.frequency.value=440*p[0];
+g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(p[1],t+.005);g.gain.exponentialRampToValueAtTime(.0001,t+3.2/Math.sqrt(p[0]));o.connect(g);g.connect(m);o.start(t);o.stop(t+3.3)})}catch(e){}}
+a.addEventListener("click",function(){campana();a.classList.remove("toca");void a.offsetWidth;a.classList.add("toca")});
 })();
 </script>
 </body></html>
