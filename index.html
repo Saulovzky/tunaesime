@@ -73,6 +73,25 @@ h1.font-serif,h2.font-serif{font-weight:600!important}
 aside[aria-label="Aviso institucional"]{overflow:hidden}
 aside[aria-label="Aviso institucional"] *{font-size:11px!important;letter-spacing:.2em!important;white-space:nowrap}
 @media(max-width:1199px){aside[aria-label="Aviso institucional"] *{white-space:normal!important;letter-spacing:.1em!important;font-size:10.5px!important}}
+
+@media(min-width:1024px){.hero-left{grid-column:span 6 / span 6}.hero-right{grid-column:span 6 / span 6}}
+.hv-frame{position:relative;aspect-ratio:16/9;border-radius:14px 14px 0 0;overflow:hidden;background:#000;box-shadow:0 24px 50px rgba(0,0,0,.28)}
+.hv-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000}
+.hv-count{position:absolute;top:14px;left:14px;display:flex;align-items:center;gap:10px;padding:8px 14px 8px 10px;border-radius:99px;background:rgba(9,10,9,.72);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.18);color:#fff}
+.hv-count b{display:inline-flex;align-items:center;justify-content:center;min-width:38px;height:38px;border-radius:50%;background:#005a2b;font:700 17px/1 "Space Mono",monospace}
+.hv-count span{font:12px/1 "Space Mono",monospace;letter-spacing:.14em;text-transform:uppercase}
+.hv-snd{position:absolute;right:14px;bottom:18px;width:44px;height:44px;border-radius:50%;background:rgba(9,10,9,.72);border:1px solid rgba(255,255,255,.22);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.hv-snd:hover{background:#005a2b}
+.hv-play{position:absolute;inset:0;margin:auto;width:76px;height:76px;border-radius:50%;background:#f8faf8;color:#090a09;display:flex;align-items:center;justify-content:center;cursor:pointer;border:0;box-shadow:0 0 40px rgba(0,0,0,.45)}
+.hv-end{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;background:rgba(9,10,9,.78);color:#fff;padding:20px}
+.hv-end p{margin:0;font:600 clamp(1.4rem,2.6vw,2rem)/1.15 "Cormorant Garamond",Georgia,serif}
+.hv-end span{font:12px/1.4 "Space Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:#c4cbc7}
+.hv-end button{margin-top:12px;padding:10px 22px;border-radius:99px;border:1px solid rgba(255,255,255,.4);background:transparent;color:#fff;font:12px/1 "Space Mono",monospace;letter-spacing:.14em;text-transform:uppercase;cursor:pointer}
+.hv-end button:hover{background:#005a2b;border-color:#005a2b}
+.hv-bar{position:absolute;left:0;right:0;bottom:0;height:4px;background:rgba(255,255,255,.2)}
+.hv-bar i{display:block;height:100%;width:0;background:#10b981}
+.hv-cap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;border:1px solid rgb(0 0 0/.12);border-top:0;border-radius:0 0 14px 14px;background:rgb(var(--c-cardinal))}
+.hv-since{display:flex;align-items:center;gap:6px;padding:5px 10px;border-radius:6px;border:1px solid rgb(0 0 0/.14);font:11px/1 "Space Mono",monospace;color:#007838}
 </style>
 </head>
 <body class="bg-obsidian text-parchment font-sans antialiased selection:bg-flag-green selection:text-white overflow-x-hidden">
@@ -165,7 +184,7 @@ aside[aria-label="Aviso institucional"] *{font-size:11px!important;letter-spacin
 <div class="absolute -bottom-24 left-10 w-[450px] h-[450px] bg-silver/5 rounded-full blur-[140px] pointer-events-none"></div>
 <div class="max-w-7xl mx-auto px-6 w-full">
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-<div class="lg:col-span-7 flex flex-col justify-center">
+<div class="lg:col-span-7 flex flex-col justify-center hero-left">
 <span class="text-xs font-mono tracking-[0.35em] text-flag-green uppercase mb-4 block font-semibold">
               AGRUPACIÓN CULTURAL • IPN
             </span>
@@ -204,23 +223,26 @@ aside[aria-label="Aviso institucional"] *{font-size:11px!important;letter-spacin
 </div>
 </div>
 </div>
-<div class="lg:col-span-5 relative">
-<div class="relative group">
-<div class="absolute -inset-2 rounded-2xl hairline-border bg-gradient-to-b from-black/10 to-transparent pointer-events-none"></div>
-<div class="oscuro relative rounded-xl overflow-hidden bg-black shadow-2xl h-[420px] sm:h-[520px]">
-<div class="foto-vacia" aria-hidden="true"><img src="logo.png" alt="" class="w-40 h-40 object-contain opacity-60"/></div>
-<img id="heroImg" alt="" class="absolute inset-0 w-full h-full object-cover object-center filter saturate-[0.85] contrast-[1.1] group-hover:scale-105 group-hover:saturate-100 transition-all duration-700 ease-out" width="800" height="1000"/>
-<div class="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-black/20"></div>
-<div class="absolute bottom-4 left-4 right-4 p-4 rounded-lg bg-obsidian/85 backdrop-blur-md hairline-border flex items-center justify-between">
+<div class="lg:col-span-5 relative hero-right">
+<div class="hv">
+<div class="hv-frame oscuro">
+<video id="heroVideo" class="hv-video" muted playsinline preload="auto" poster="video/presentacion.jpg" aria-label="Video de presentación de la Tuna de la ESIME Zacatenco">
+<source src="video/presentacion.mp4" type="video/mp4">
+</video>
+<div class="hv-count" id="hvCount" aria-live="off"><b id="hvNum">16</b><span>seg. restantes</span></div>
+<button type="button" class="hv-snd" id="hvSnd" aria-label="Activar sonido" title="Activar sonido">
+<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z" fill="currentColor"/><path id="hvSndOn" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11" style="display:none"/><path id="hvSndOff" d="M16 9.5l5 5M21 9.5l-5 5"/></svg>
+</button>
+<button type="button" class="hv-play" id="hvPlay" aria-label="Reproducir video" style="display:none"><svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>
+<div class="hv-end" id="hvEnd" style="display:none"><p>¡Gracias por acompañarnos!</p><span>Sigue navegando por la página</span><button type="button" id="hvAgain">Ver de nuevo</button></div>
+<div class="hv-bar" aria-hidden="true"><i id="hvFill"></i></div>
+</div>
+<div class="hv-cap">
 <div class="flex flex-col">
 <span class="font-serif text-base text-ivory tracking-wide font-normal">La Tuna de la ESIMEZ</span>
 <span class="text-[10px] font-mono tracking-[0.25em] text-silver uppercase">Instituto Politécnico Nacional</span>
 </div>
-<div class="flex items-center gap-1.5 px-2.5 py-1 rounded bg-black/60 hairline-border text-[10px] font-mono text-flag-green-light">
-<span class="w-1.5 h-1.5 rounded-full bg-flag-green"></span>
-<span>DESDE 2003</span>
-</div>
-</div>
+<div class="hv-since"><span class="w-1.5 h-1.5 rounded-full bg-flag-green"></span><span>DESDE 2003</span></div>
 </div>
 </div>
 </div>
@@ -729,7 +751,7 @@ window.__iniciar = function (D) {
   $$("#menu-movil a").forEach(function (a) { a.addEventListener("click", function () { menuAbierto(false); }); });
 
   /* ---------- foto de portada ---------- */
-  var hImg = $("#heroImg");
+  var hImg = $("#heroImg") || document.createElement("img");
   if (D.portada && D.portada.foto) {
     hImg.alt = D.portada.alt || "";
     hImg.addEventListener("error", function () { hImg.style.display = "none"; });
@@ -1183,6 +1205,32 @@ window.__iniciar = function (D) {
   }
   /* espera a que contenido.json (si existe) termine de cargar */
   var t=0;(function esperar(){ if(window.__hecho||t++>50)return pintar(); setTimeout(esperar,100); })();
+})();
+</script>
+<script>
+/* video de portada con cuenta regresiva */
+(function(){
+  var v=document.getElementById("heroVideo"); if(!v)return;
+  var num=document.getElementById("hvNum"),fill=document.getElementById("hvFill"),snd=document.getElementById("hvSnd"),play=document.getElementById("hvPlay"),end=document.getElementById("hvEnd"),again=document.getElementById("hvAgain"),cnt=document.getElementById("hvCount");
+  var on=document.getElementById("hvSndOn"),off=document.getElementById("hvSndOff");
+  function resto(){var d=v.duration;if(!isFinite(d)||!d)return;num.textContent=Math.max(0,Math.ceil(d-v.currentTime));fill.style.width=(v.currentTime/d*100)+"%";}
+  v.addEventListener("loadedmetadata",resto);v.addEventListener("timeupdate",resto);
+  v.addEventListener("play",function(){play.style.display="none";end.style.display="none";cnt.style.display="";});
+  v.addEventListener("ended",function(){num.textContent="0";fill.style.width="100%";end.style.display="flex";});
+  function sonido(){
+    v.muted=!v.muted;
+    on.style.display=v.muted?"none":"";off.style.display=v.muted?"":"none";
+    snd.setAttribute("aria-label",v.muted?"Activar sonido":"Silenciar");
+    if(!v.muted){var a=document.getElementById("audio");if(a&&!a.paused)a.pause();}
+  }
+  snd.addEventListener("click",sonido);
+  play.addEventListener("click",function(){v.play();});
+  again.addEventListener("click",function(){v.currentTime=0;v.play();});
+  var a=document.getElementById("audio");
+  if(a)a.addEventListener("play",function(){if(!v.muted){v.muted=true;on.style.display="none";off.style.display="";}});
+  var reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(reduce){play.style.display="flex";}
+  else{var p=v.play();if(p&&p.catch)p.catch(function(){play.style.display="flex";});}
 })();
 </script>
 </body></html>
