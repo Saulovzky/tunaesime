@@ -40,7 +40,7 @@
 .pl-ctrl button.pl-s svg{width:20px;height:20px}
 .pl-ctrl button.pl-p svg{width:28px;height:28px}
 
-.act-grid{display:grid;gap:1.75rem;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),440px))}
+.act-grid{display:grid;gap:1.75rem;grid-template-columns:minmax(0,1fr)}
 .act-card{background:rgb(var(--c-cardinal));border:1px solid rgb(0 0 0/.12);border-radius:14px;overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,.08)}
 .act-vid{position:relative;aspect-ratio:16/9;background:#000;display:block;width:100%;border:0;padding:0;cursor:pointer}
 .act-vid img,.act-vid iframe{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0}
@@ -48,7 +48,9 @@
 .act-vid:hover .act-play{transform:scale(1.1);background:#005a2b;color:#fff}
 .act-vid::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 55%,rgba(0,0,0,.45));pointer-events:none}
 .act-vid.on::after{display:none}
-.act-info{padding:16px 18px 18px}
+.act-card{display:grid;grid-template-columns:minmax(0,1fr)}
+.act-info{padding:20px 20px 22px}
+@media(min-width:768px){.act-card{grid-template-columns:minmax(0,5fr) minmax(0,7fr);align-items:center}.act-info{padding:36px 40px}.act-info h3{font-size:2.4rem!important}}
 .act-info h3{font-family:"Cormorant Garamond",Georgia,serif;font-size:1.5rem;line-height:1.15;font-weight:500;color:rgb(var(--c-ivory));margin:0 0 4px}
 .act-info p{margin:0;font:11px/1.5 "Space Mono",monospace;letter-spacing:.08em;color:rgb(var(--c-silver))}
 .act-info a{display:inline-block;margin-top:10px;font:11px/1 "Space Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:#007838}
@@ -619,14 +621,10 @@ window.TUNA = {
      Guarda las imágenes en la carpeta "fotos/" y agrégalas aquí.
      "pie" es el texto que aparece al abrir la foto (opcional). */
   fotos: [
-    {
-      src: "fotos/portada.jpg",
-      alt: "Tuneros de la ESIME Zacatenco celebrando con la bandera de la escuela",
-      pie: "Tuna de la ESIME"
-    }
+    // Galería oculta por ahora. Al agregar fotos aquí, la sección vuelve a aparecer sola:
     // { src: "fotos/certamen-2025.jpg", alt: "Descripción corta", pie: "Certamen 2025" },
   ],
-  galeriaCompleta: "https://www.flickr.com/photos/203089225@N06/",
+  galeriaCompleta: "",
 
   /* ---------- DISCOGRAFÍA ----------
      "archivo": mp3 dentro de la carpeta "audio/" (conviértelos a MP3 de 128 kbps).
@@ -651,9 +649,9 @@ window.TUNA = {
      "enlace": (opcional) dirección para más información. */
   eventos: [
     {
-      titulo: "8vo Certamen Interpolitécnico",
-      lugar: "Escuela Superior de Ingeniería Química e Industrias Extractivas (ESIQIE) — IPN",
-      fecha: "",
+      titulo: "XIII Certamen de Tunas de Aguascalientes",
+      lugar: "Aguascalientes",
+      fecha: "2026-10-31",
       enlace: ""
     }
     // { titulo: "Nombre del evento", lugar: "Dónde será", fecha: "2026-12-05", enlace: "" },
@@ -661,10 +659,10 @@ window.TUNA = {
 
   /* ---------- CORREO PARA EL FORMULARIO DE CONTRATACIÓN ---------- */
   /* ---------- ÚLTIMAS ACTIVIDADES RELEVANTES ----------
-     Cada una es un mini video de YouTube. "inicio" = segundo donde arranca (4:21 = 261).
+     Cada una es un mini video de YouTube. "inicio" = segundo donde arranca (0 = desde el principio; 4:21 = 261).
      "texto" (opcional) es una línea corta bajo el título. */
   actividades: [
-    { id: "6E8wfUfs6WM", titulo: "TESIMEZ Europa 2026", inicio: 261 }
+    { id: "6E8wfUfs6WM", titulo: "TESIMEZ Europa 2026", inicio: 0 }
     // { id: "OTRO_ID", titulo: "Nombre de la actividad", inicio: 0, texto: "Una línea breve" },
   ],
 
@@ -950,7 +948,7 @@ window.__iniciar = function (D) {
   if (D.galeriaCompleta) $("#galeriaFlickr").href = D.galeriaCompleta;
   if (!FOT.length && !D.galeriaCompleta) {
     $("#galeria").style.display = "none";
-    ["#navGaleria", '[data-nav="galeria"]'].forEach(function (s) { var n = $(s); if (n) n.style.display = "none"; });
+    $$('a[href="#galeria"]').forEach(function (a) { var n = a.closest("li") || a; n.style.display = "none"; });
   }
   FOT.forEach(function (f, i) {
     var cuadro = el("button", "marco group text-left"); cuadro.type = "button";
@@ -1162,7 +1160,7 @@ window.__iniciar = function (D) {
       var h3=document.createElement("h3");h3.textContent=a.titulo||"Actividad";info.appendChild(h3);
       if(a.texto){var pp=document.createElement("p");pp.textContent=a.texto;info.appendChild(pp);}
       var l=document.createElement("a");l.href="https://www.youtube.com/watch?v="+a.id+(a.inicio?"&t="+(parseInt(a.inicio,10)||0)+"s":"");l.target="_blank";l.rel="noopener noreferrer";l.textContent="Ver en YouTube ↗";info.appendChild(l);
-      card.appendChild(v);card.appendChild(info);g.appendChild(card);
+      card.appendChild(info);card.appendChild(v);g.appendChild(card);
     });
   }
   /* espera a que contenido.json (si existe) termine de cargar */
