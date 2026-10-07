@@ -605,7 +605,7 @@ window.TUNA = {
      youtube.com/watch?v=sOKbyxY-wPQ  ->  id: "sOKbyxY-wPQ"
      El primero es el que aparece grande. */
   videos: [
-    { id: "sOKbyxY-wPQ", titulo: "Tuna de la ESIME" }
+    { id: "sOKbyxY-wPQ", titulo: "Tuna de la ESIME", inicio: 751 } /* inicio = segundo donde arranca (12:31 = 751) */
     // { id: "OTRO_ID", titulo: "Título del siguiente video" },
   ],
   canalYoutube: "https://www.youtube.com/@tunaesimezacatenco884",
@@ -885,7 +885,7 @@ window.__iniciar = function (D) {
     if (reproducir) {
       quiere = false; audio.pause();
       var f = document.createElement("iframe");
-      f.src = "https://www.youtube-nocookie.com/embed/" + v.id + "?autoplay=1&rel=0";
+      f.src = "https://www.youtube-nocookie.com/embed/" + v.id + "?autoplay=1&rel=0" + (v.inicio ? "&start=" + (parseInt(v.inicio, 10) || 0) : "");
       f.title = v.titulo || "Video de la Tuna ESIME";
       f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
       f.allowFullscreen = true;
