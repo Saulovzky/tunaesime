@@ -130,6 +130,12 @@ aside[aria-label="Aviso institucional"] *{font-size:11px!important;letter-spacin
 @keyframes camp{0%,100%{transform:rotate(-22deg)}50%{transform:rotate(22deg)}}
 @keyframes balanceo{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
 @media (prefers-reduced-motion:reduce){.firma:hover .firma-camp,.firma:hover .firma-ico{animation:none}}
+.fc-estado{margin-top:16px;padding:14px 16px;border:1px solid rgba(0,0,0,.18);border-radius:12px;font-family:"Plus Jakarta Sans",sans-serif;font-size:14px;line-height:1.5;color:inherit}
+.fc-estado[hidden]{display:none}
+.fc-estado p{margin:0 0 10px}.fc-estado p:last-child{margin:0}
+.fc-botones{display:flex;flex-wrap:wrap;gap:8px}
+.fc-botones a,.fc-botones button{font-family:"Space Mono",monospace;font-size:12px;padding:8px 14px;border-radius:999px;border:1px solid currentColor;background:transparent;color:inherit;cursor:pointer;text-decoration:none}
+.fc-botones a:hover,.fc-botones button:hover{background:rgba(0,0,0,.06)}
 </style>
 </head>
 <body class="bg-obsidian text-parchment font-sans antialiased selection:bg-flag-green selection:text-white overflow-x-hidden">
@@ -579,9 +585,10 @@ aside[aria-label="Aviso institucional"] *{font-size:11px!important;letter-spacin
 <textarea class="w-full bg-transparent border-0 border-b border-black/25 px-0 py-2.5 text-ivory placeholder:text-silver/30 text-sm focus:ring-0 focus:border-flag-green transition-colors resize-none" id="f-msg" placeholder="Indica la fecha propuesta, el lugar y lo que necesites..." rows="3"></textarea>
 </div>
 <button class="w-full py-4 rounded-full bg-flag-green hover:bg-flag-green-light text-ivory text-xs font-mono tracking-[0.2em] uppercase font-semibold transition-all mt-4" type="submit">
-                Preparar correo
+                Enviar solicitud
               </button>
-<p class="text-[11px] font-mono text-silver/50 leading-relaxed">Se abrirá tu aplicación de correo con el mensaje listo para enviar a la Tuna.</p>
+<p class="text-[11px] font-mono text-silver/50 leading-relaxed">Tu mensaje llegará directamente al correo de la Tuna. Te responderemos lo antes posible.</p>
+<div class="fc-estado" id="fc-estado" role="status" aria-live="polite" hidden></div>
 </form>
 </div>
 </div>
@@ -1112,15 +1119,42 @@ window.__iniciar = function (D) {
     }
   });
 
-  /* ---------- formulario: prepara el correo ---------- */
-  $("#form-contacto").addEventListener("submit", function (e) {
-    e.preventDefault();
-    var n = $("#f-nombre").value.trim(), c = $("#f-correo").value.trim(), t = $("#f-tipo").value, m = $("#f-msg").value.trim();
-    var cuerpo = "Hola, somos " + n + " y nos gustaría contratar una presentación de la Tuna.\n\n" +
-      "Tipo de evento: " + t + "\nCorreo de contacto: " + c + "\n\n" + (m ? m + "\n\n" : "") + "Gracias.";
-    window.location.href = "mailto:" + (D.correo || "tesimez.oficial@gmail.com") +
-      "?subject=" + encodeURIComponent("Solicitud de presentación: " + t) + "&body=" + encodeURIComponent(cuerpo);
-  });
+  /* ---------- formulario: envía el mensaje (con plan B) ---------- */
+  (function () {
+    var form = $("#form-contacto"), est = $("#fc-estado"), btn = form.querySelector("button[type=submit]");
+    var destino = D.correo || "tesimez.oficial@gmail.com";
+    function mostrar(html) { est.hidden = false; est.innerHTML = html; }
+    function planB(asunto, cuerpo) {
+      est.hidden = false; est.textContent = "";
+      var p = document.createElement("p"); p.textContent = "No pudimos enviarlo automáticamente. Elige cómo mandar tu mensaje a " + destino + ":"; est.appendChild(p);
+      var fila = document.createElement("div"); fila.className = "fc-botones";
+      var g = document.createElement("a"); g.textContent = "Abrir Gmail"; g.target = "_blank"; g.rel = "noopener noreferrer";
+      g.href = "https://mail.google.com/mail/?view=cm&fs=1&to=" + encodeURIComponent(destino) + "&su=" + encodeURIComponent(asunto) + "&body=" + encodeURIComponent(cuerpo);
+      var m = document.createElement("a"); m.textContent = "Otra app de correo"; m.href = "mailto:" + destino + "?subject=" + encodeURIComponent(asunto) + "&body=" + encodeURIComponent(cuerpo);
+      var c = document.createElement("button"); c.type = "button"; c.textContent = "Copiar mensaje";
+      c.addEventListener("click", function () {
+        var t = "Para: " + destino + "\nAsunto: " + asunto + "\n\n" + cuerpo;
+        (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { c.textContent = "¡Copiado!"; }, function () { c.textContent = "Selecciona y copia el texto de arriba"; });
+      });
+      fila.appendChild(g); fila.appendChild(m); fila.appendChild(c); est.appendChild(fila);
+    }
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var n = $("#f-nombre").value.trim(), c = $("#f-correo").value.trim(), t = $("#f-tipo").value, msg = $("#f-msg").value.trim();
+      var asunto = "Solicitud de presentación: " + t;
+      var cuerpo = "Hola, somos " + n + " y nos gustaría contratar una presentación de la Tuna.\n\nTipo de evento: " + t + "\nCorreo de contacto: " + c + "\n\n" + (msg ? msg + "\n\n" : "") + "Gracias.";
+      btn.disabled = true; var txt = btn.textContent; btn.textContent = "Enviando…"; est.hidden = true;
+      var ctrl = window.AbortController ? new AbortController() : null, to = setTimeout(function () { if (ctrl) ctrl.abort(); }, 12000);
+      fetch("https://formsubmit.co/ajax/" + destino, {
+        method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({ name: n, email: c, "Tipo de evento": t, message: msg || "(sin mensaje)", _subject: asunto, _template: "table", _captcha: "false", _replyto: c }),
+        signal: ctrl ? ctrl.signal : undefined
+      }).then(function (r) { return r.json(); }).then(function (j) {
+        if (j && (j.success === true || j.success === "true")) { form.reset(); mostrar("<p><strong>¡Solicitud enviada!</strong> Gracias, " + n.replace(/[<>&]/g, "") + ". La Tuna te responderá al correo que indicaste.</p>"); }
+        else { planB(asunto, cuerpo); }
+      }).catch(function () { planB(asunto, cuerpo); }).then(function () { clearTimeout(to); btn.disabled = false; btn.textContent = txt; });
+    });
+  })();
 
   $("#heroVideoBtn").addEventListener("click", function () { /* solo navega a la sala de proyección */ });
 };
