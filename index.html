@@ -82,6 +82,8 @@ aside[aria-label="Aviso institucional"] *{font-size:11px!important;letter-spacin
 .hv-count span{font:12px/1 "Space Mono",monospace;letter-spacing:.14em;text-transform:uppercase}
 .hv-snd{position:absolute;right:14px;bottom:18px;width:44px;height:44px;border-radius:50%;background:rgba(9,10,9,.72);border:1px solid rgba(255,255,255,.22);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer}
 .hv-snd:hover{background:#005a2b}
+.hv-snd.hv-pulse{animation:hvp 1.6s ease-out infinite;border-color:#fff}
+@keyframes hvp{0%{box-shadow:0 0 0 0 rgba(255,255,255,.65)}100%{box-shadow:0 0 0 16px rgba(255,255,255,0)}}
 .hv-play{position:absolute;inset:0;margin:auto;width:76px;height:76px;border-radius:50%;background:#f8faf8;color:#090a09;display:flex;align-items:center;justify-content:center;cursor:pointer;border:0;box-shadow:0 0 40px rgba(0,0,0,.45)}
 .hv-end{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;background:rgba(9,10,9,.78);color:#fff;padding:20px}
 .hv-end p{margin:0;font:600 clamp(1.4rem,2.6vw,2rem)/1.15 "Cormorant Garamond",Georgia,serif}
@@ -226,7 +228,7 @@ aside[aria-label="Aviso institucional"] *{font-size:11px!important;letter-spacin
 <div class="lg:col-span-5 relative hero-right">
 <div class="hv">
 <div class="hv-frame oscuro">
-<video id="heroVideo" class="hv-video" muted playsinline preload="auto" poster="video/presentacion.jpg" aria-label="Video de presentación de la Tuna de la ESIME Zacatenco">
+<video id="heroVideo" class="hv-video" playsinline preload="auto" poster="video/presentacion.jpg" aria-label="Video de presentación de la Tuna de la ESIME Zacatenco">
 <source src="video/presentacion.mp4" type="video/mp4">
 </video>
 <div class="hv-count" id="hvCount" aria-live="off"><b id="hvNum">16</b><span>seg. restantes</span></div>
@@ -1219,8 +1221,7 @@ window.__iniciar = function (D) {
   v.addEventListener("ended",function(){num.textContent="0";fill.style.width="100%";end.style.display="flex";});
   function sonido(){
     v.muted=!v.muted;
-    on.style.display=v.muted?"none":"";off.style.display=v.muted?"":"none";
-    snd.setAttribute("aria-label",v.muted?"Activar sonido":"Silenciar");
+    iconos();
     if(!v.muted){var a=document.getElementById("audio");if(a&&!a.paused)a.pause();}
   }
   snd.addEventListener("click",sonido);
@@ -1228,9 +1229,26 @@ window.__iniciar = function (D) {
   again.addEventListener("click",function(){v.currentTime=0;v.play();});
   var a=document.getElementById("audio");
   if(a)a.addEventListener("play",function(){if(!v.muted){v.muted=true;on.style.display="none";off.style.display="";}});
+  function iconos(){on.style.display=v.muted?"none":"";off.style.display=v.muted?"":"none";snd.setAttribute("aria-label",v.muted?"Activar sonido":"Silenciar");snd.classList.toggle("hv-pulse",v.muted&&!v.paused);}
+  v.addEventListener("volumechange",iconos);v.addEventListener("play",iconos);iconos();
+  /* a la primera interacción del visitante (clic, toque o tecla) se activa el sonido */
+  function gesto(e){
+    if(e&&e.target&&e.target.closest&&e.target.closest("#hvSnd"))return;
+    ["pointerdown","keydown","touchstart"].forEach(function(t){document.removeEventListener(t,gesto,true);});
+    if(v.muted&&!v.ended){v.muted=false;var a=document.getElementById("audio");if(a&&!a.paused)a.pause();if(v.paused)v.play().catch(function(){});}
+  }
+  ["pointerdown","keydown","touchstart"].forEach(function(t){document.addEventListener(t,gesto,true);});
   var reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
   if(reduce){play.style.display="flex";}
-  else{var p=v.play();if(p&&p.catch)p.catch(function(){play.style.display="flex";});}
+  else{
+    /* espera 1 segundo y arranca con audio; si el navegador no lo permite, arranca sin sonido */
+    setTimeout(function(){
+      if(!v.paused)return;
+      v.muted=false;
+      var p=v.play();
+      if(p&&p.catch)p.catch(function(){v.muted=true;var q=v.play();if(q&&q.catch)q.catch(function(){play.style.display="flex";});});
+    },1000);
+  }
 })();
 </script>
 </body></html>
