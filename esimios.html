@@ -159,6 +159,14 @@ aside[aria-label="Aviso institucional"] *{font-size:11px!important;letter-spacin
 @media (max-width:480px){.es-grid{grid-template-columns:repeat(2,1fr);gap:12px}.es-foto{width:88px;height:88px}}
 .es-volver{display:inline-block;margin-bottom:22px;font:12px "Space Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:rgb(var(--c-silver));text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:2px}
 .es-volver:hover{color:rgb(var(--c-ivory))}
+.es-misterio{border-style:dashed;border-width:2px}
+.es-misterio-link{display:flex;flex-direction:column;align-items:center;text-align:center;color:inherit;text-decoration:none;width:100%}
+.es-silueta{position:relative;display:block;margin-bottom:14px;border:3px dashed rgb(var(--c-ivory));background:#cfc8d8;overflow:hidden}
+.es-silueta img{width:100%;height:100%;object-fit:cover;filter:brightness(0) opacity(.78)}
+.es-silueta b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:700 54px "Cormorant Garamond",Georgia,serif;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.4)}
+.es-cta{margin-top:10px;font:700 11px "Space Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:rgb(0 90 43);border-bottom:1px solid currentColor}
+.es-misterio:hover{border-color:rgb(0 90 43)}
+.es-misterio:focus-within{outline:2px solid rgb(var(--c-ivory));outline-offset:2px}
 </style>
 </head>
 <body class="bg-obsidian text-parchment font-sans antialiased selection:bg-flag-green selection:text-white overflow-x-hidden">
@@ -289,6 +297,7 @@ aside[aria-label="Aviso institucional"] *{font-size:11px!important;letter-spacin
 <li class="es-card"><span class="es-num">33</span><img class="es-foto" src="fotos/esimio.jpg" alt="Foto de Igor" width="104" height="104" loading="lazy" decoding="async"><span class="es-nombre">Brandon Humberto Martinez Ruiseco</span><span class="es-mote">“Igor”</span></li>
 <li class="es-card"><span class="es-num">34</span><img class="es-foto" src="fotos/esimio.jpg" alt="Foto de Menonita" width="104" height="104" loading="lazy" decoding="async"><span class="es-nombre">Huemant Acxel Romero Olguin</span><span class="es-mote">“Menonita”</span></li>
 <li class="es-card"><span class="es-num">35</span><img class="es-foto" src="fotos/esimio.jpg" alt="Foto de Tizoc" width="104" height="104" loading="lazy" decoding="async"><span class="es-nombre">David Pérez García</span><span class="es-mote">“Tizoc”</span></li>
+<li class="es-card es-misterio"><span class="es-num">36</span><a class="es-misterio-link" href="/#unete" aria-label="El número 36 puede ser tuyo. Conoce la convocatoria"><span class="es-foto es-silueta" aria-hidden="true"><img src="fotos/esimio.jpg" alt="" width="104" height="104" loading="lazy" decoding="async"><b>?</b></span><span class="es-nombre">¿¿¿ ??? ???</span><span class="es-mote">“¿Serás tú?”</span><span class="es-tag">Lugar disponible</span><span class="es-cta">Únete a la Tuna →</span></a></li>
 </ol>
 </div>
 </section>
