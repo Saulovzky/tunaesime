@@ -158,6 +158,12 @@ aside[aria-label="Aviso institucional"] *{font-size:11px!important;letter-spacin
 .es-mote{font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-size:1.2rem;font-weight:600;margin-top:6px;color:rgb(0 90 43)}
 .es-tag{margin-top:8px;font:700 10px "Space Mono",monospace;letter-spacing:.14em;text-transform:uppercase;padding:3px 9px;border:1px solid currentColor;border-radius:999px;color:rgb(var(--c-silver))}
 @media (max-width:480px){.es-grid{grid-template-columns:repeat(2,1fr);gap:12px}.es-foto{width:88px;height:88px}}
+.es-banner{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.es-banner-foto{width:96px;height:96px;border-radius:50%;object-fit:cover;border:3px solid rgb(var(--c-ivory));flex:none}
+.es-banner-txt{flex:1 1 320px;min-width:0}
+.es-banner-txt p{margin:0;font-family:"Plus Jakarta Sans",sans-serif;font-size:15.5px;line-height:1.6;color:rgb(var(--c-silver))}
+.es-banner-btn{display:inline-flex;align-items:center;gap:10px;padding:12px 22px;border-radius:999px;background:rgb(0 90 43);color:#fff;text-decoration:none;font:600 12px "Space Mono",monospace;letter-spacing:.16em;text-transform:uppercase}
+.es-banner-btn:hover{background:rgb(0 110 52)}
 </style>
 </head>
 <body class="bg-obsidian text-parchment font-sans antialiased selection:bg-flag-green selection:text-white overflow-x-hidden">
@@ -224,6 +230,7 @@ aside[aria-label="Aviso institucional"] *{font-size:11px!important;letter-spacin
 <a class="py-3.5 hairline-b hover:text-ivory" href="#galeria" data-nav="galeria">Galería</a>
 <a class="py-3.5 hairline-b hover:text-ivory" href="#presentaciones">Certámenes</a>
 <a class="py-3.5 hairline-b hover:text-ivory" href="#unete">Ingreso</a>
+<a class="py-3.5 hairline-b hover:text-ivory" href="esimios.html">ESIMIOS</a>
 <a class="py-3.5 text-flag-green-light font-semibold" href="#contacto">Contrataciones</a>
 </nav>
 </div>
@@ -468,53 +475,21 @@ aside[aria-label="Aviso institucional"] *{font-size:11px!important;letter-spacin
 </div>
 </section>
 
-<!-- ESIMIOS -->
-<section class="py-24 bg-obsidian hairline-b relative" id="esimios" aria-labelledby="esimios-t">
+<!-- ESIMIOS (resumen) -->
+<section class="py-14 bg-obsidian hairline-b relative" id="esimios" aria-labelledby="esimios-t">
 <div class="max-w-7xl mx-auto px-6">
-<div class="es-cab">
-<span class="text-[11px] font-mono tracking-[0.25em] text-silver/70 uppercase block mb-2">MIEMBROS HASTA LA FECHA · POR ORDEN DE ANTIGÜEDAD (ROA)</span>
-<h2 id="esimios-t" class="font-serif text-5xl md:text-6xl text-ivory font-normal mb-5">ESIMIOS</h2>
-<p class="es-desc"><strong>ESIMIOS</strong> es una modificación de la palabra <em>ESIME</em> unida a <em>SIMIO</em>, el personaje y la mascota con la que se conoce a los estudiantes de la Escuela Superior de Ingeniería Mecánica y Eléctrica. Aquí están los integrantes de la Tuna ESIME Zacatenco, en orden de antigüedad, con el mote con el que los conocemos.</p>
+<div class="es-banner">
+<img class="es-banner-foto" src="fotos/esimio.jpg" alt="Esimio, la mascota de la ESIME" width="96" height="96" loading="lazy" decoding="async">
+<div class="es-banner-txt">
+<span class="text-[11px] font-mono tracking-[0.25em] text-silver/70 uppercase block mb-1">LOS INTEGRANTES</span>
+<h2 id="esimios-t" class="font-serif text-4xl text-ivory font-normal mb-2">ESIMIOS</h2>
+<p>ESIME + SIMIO: así se conoce a los estudiantes de la escuela. Conoce a los 35 integrantes de la Tuna, por orden de antigüedad y con sus motes.</p>
 </div>
-<ol class="es-grid">
-<li class="es-card"><span class="es-num">01</span><img class="es-foto" src="fotos/esimio.jpg" alt="Foto de Troll" width="104" height="104" loading="lazy" decoding="async"><span class="es-nombre">Juan Enrique Paredes Contreras</span><span class="es-mote">“Troll”</span></li>
-<li class="es-card"><span class="es-num">02</span><img class="es-foto" src="fotos/esimio.jpg" alt="Foto de Mampo" width="104" height="104" loading="lazy" decoding="async"><span class="es-nombre">Abraham Jacobo Hernández Martínez</span><span class="es-mote">“Mampo”</span></li>
-<li class="es-card"><span class="es-num">03</span><img class="es-foto" src="fotos/esimio.jpg" alt="Foto de Espartaco" width="104" height="104" loading="lazy" decoding="async"><span class="es-nombre">Cristobal Ortiz Ponce</span><span class="es-mote">“Espartaco”</span></li>
-<li class="es-card"><span class="es-num">04</span><img class="es-foto" src="fotos/esimio.jpg" alt="Foto de Mojojojo" width="104" height="104" loading="lazy" decoding="async"><span class="es-nombre">Xavier Avila Martínez</span><span class="es-mote">“Mojojojo”</span></li>
-<li class="es-card"><span class="es-num">05</span><img class="es-foto" src="fotos/esimio.jpg" alt="Foto de Miyagi" width="104" height="104" loading="lazy" decoding="async"><span class="es-nombre">Martín Díaz</span><span class="es-mote">“Miyagi”</span><span class="es-tag">Siempre tuno</span></li>
-<li class="es-card"><span class="es-num">06</span><img class="es-foto" src="fotos/esimio.jpg" alt="Foto de Pitufo" width="104" height="104" loading="lazy" decoding="async"><span class="es-nombre">Omar Gustavo Cano Vazquez</span><span class="es-mote">“Pitufo”</span></li>
-<li class="es-card"><span class="es-num">07</span><img class="es-foto" src="fotos/esimio.jpg" alt="Foto de Parka" width="104" height="104" loading="lazy" decoding="async"><span class="es-nombre">Daniel Trinidad Cruz Rojas</span><span class="es-mote">“Parka”</span></li>
-<li class="es-card"><span class="es-num">08</span><img class="es-foto" src="fotos/esimio.jpg" alt="Foto de Muxe" width="104" height="104" loading="lazy" decoding="async"><span class="es-nombre">Luis Antonio Avilés Arellano</span><span class="es-mote">“Muxe”</span></li>
-<li class="es-card"><span class="es-num">09</span><img class="es-foto" src="fotos/esimio.jpg" alt="Foto de Pony" width="104" height="104" loading="lazy" decoding="async"><span class="es-nombre">Ivan Sánchez</span><span class="es-mote">“Pony”</span></li>
-<li class="es-card"><span class="es-num">10</span><img class="es-foto" src="fotos/esimio.jpg" alt="Foto de Cucaracha" width="104" height="104" loading="lazy" decoding="async"><span class="es-nombre">Jorge Alberto Olarte Muñoz</span><span class="es-mote">“Cucaracha”</span></li>
-<li class="es-card"><span class="es-num">11</span><img class="es-foto" src="fotos/esimio.jpg" alt="Foto de Triste" width="104" height="104" loading="lazy" decoding="async"><span class="es-nombre">Cristobal Ramírez</span><span class="es-mote">“Triste”</span></li>
-<li class="es-card"><span class="es-num">12</span><img class="es-foto" src="fotos/esimio.jpg" alt="Foto de Mantis" width="104" height="104" loading="lazy" decoding="async"><span class="es-nombre">Daniel Ramón Corona Mariscal</span><span class="es-mote">“Mantis”</span></li>
-<li class="es-card"><span class="es-num">13</span><img class="es-foto" src="fotos/esimio.jpg" alt="Foto de Dandy" width="104" height="104" loading="lazy" decoding="async"><span class="es-nombre">Edgardo Charrez López</span><span class="es-mote">“Dandy”</span></li>
-<li class="es-card"><span class="es-num">14</span><img class="es-foto" src="fotos/esimio.jpg" alt="Foto de Guillermin" width="104" height="104" loading="lazy" decoding="async"><span class="es-nombre">Jacobo Benjamín Carrillo Delgado</span><span class="es-mote">“Guillermin”</span></li>
-<li class="es-card"><span class="es-num">15</span><img class="es-foto" src="fotos/esimio.jpg" alt="Foto de Heidi" width="104" height="104" loading="lazy" decoding="async"><span class="es-nombre">Ignacio de Jesús Núñez Sánchez</span><span class="es-mote">“Heidi”</span></li>
-<li class="es-card"><span class="es-num">16</span><img class="es-foto" src="fotos/esimio.jpg" alt="Foto de Charly" width="104" height="104" loading="lazy" decoding="async"><span class="es-nombre">Carlos Augusto Miranda Segundo</span><span class="es-mote">“Charly”</span></li>
-<li class="es-card"><span class="es-num">17</span><img class="es-foto" src="fotos/esimio.jpg" alt="Foto de Cuasimodo" width="104" height="104" loading="lazy" decoding="async"><span class="es-nombre">Saúl Uriel Salaz Díaz</span><span class="es-mote">“Cuasimodo”</span></li>
-<li class="es-card"><span class="es-num">18</span><img class="es-foto" src="fotos/esimio.jpg" alt="Foto de Woody" width="104" height="104" loading="lazy" decoding="async"><span class="es-nombre">Oscar Gerardo García Rivera</span><span class="es-mote">“Woody”</span></li>
-<li class="es-card"><span class="es-num">19</span><img class="es-foto" src="fotos/esimio.jpg" alt="Foto de Zacahuil" width="104" height="104" loading="lazy" decoding="async"><span class="es-nombre">Carlos Alberto Villafañe Torres</span><span class="es-mote">“Zacahuil”</span></li>
-<li class="es-card"><span class="es-num">20</span><img class="es-foto" src="fotos/esimio.jpg" alt="Foto de Alejandro Garni" width="104" height="104" loading="lazy" decoding="async"><span class="es-nombre">Alejandro Garni</span></li>
-<li class="es-card"><span class="es-num">21</span><img class="es-foto" src="fotos/esimio.jpg" alt="Foto de Berrinches" width="104" height="104" loading="lazy" decoding="async"><span class="es-nombre">Jesús Martínez Velasco</span><span class="es-mote">“Berrinches”</span></li>
-<li class="es-card"><span class="es-num">22</span><img class="es-foto" src="fotos/esimio.jpg" alt="Foto de Garañona" width="104" height="104" loading="lazy" decoding="async"><span class="es-nombre">Diego Sebastián Gálvez Hernández</span><span class="es-mote">“Garañona”</span></li>
-<li class="es-card"><span class="es-num">23</span><img class="es-foto" src="fotos/esimio.jpg" alt="Foto de Borrega" width="104" height="104" loading="lazy" decoding="async"><span class="es-nombre">Félix Alberto Uc Hernández</span><span class="es-mote">“Borrega”</span></li>
-<li class="es-card"><span class="es-num">24</span><img class="es-foto" src="fotos/esimio.jpg" alt="Foto de Conde contar" width="104" height="104" loading="lazy" decoding="async"><span class="es-nombre">Hugo Gerardo Hernández Martínez</span><span class="es-mote">“Conde contar”</span></li>
-<li class="es-card"><span class="es-num">25</span><img class="es-foto" src="fotos/esimio.jpg" alt="Foto de Tripa" width="104" height="104" loading="lazy" decoding="async"><span class="es-nombre">Manuel Calzada Sánchez</span><span class="es-mote">“Tripa”</span></li>
-<li class="es-card"><span class="es-num">26</span><img class="es-foto" src="fotos/esimio.jpg" alt="Foto de Vilma" width="104" height="104" loading="lazy" decoding="async"><span class="es-nombre">Alfredo Islas Sánchez</span><span class="es-mote">“Vilma”</span></li>
-<li class="es-card"><span class="es-num">27</span><img class="es-foto" src="fotos/esimio.jpg" alt="Foto de Pollo" width="104" height="104" loading="lazy" decoding="async"><span class="es-nombre">José Daniel Martínez Bravo</span><span class="es-mote">“Pollo”</span></li>
-<li class="es-card"><span class="es-num">28</span><img class="es-foto" src="fotos/esimio.jpg" alt="Foto de Pepin" width="104" height="104" loading="lazy" decoding="async"><span class="es-nombre">Gonzalo Márquez Velázquez</span><span class="es-mote">“Pepin”</span></li>
-<li class="es-card"><span class="es-num">29</span><img class="es-foto" src="fotos/esimio.jpg" alt="Foto de Olanda" width="104" height="104" loading="lazy" decoding="async"><span class="es-nombre">Edgar Alan Azpeitia Piña</span><span class="es-mote">“Olanda”</span></li>
-<li class="es-card"><span class="es-num">30</span><img class="es-foto" src="fotos/esimio.jpg" alt="Foto de Georgi" width="104" height="104" loading="lazy" decoding="async"><span class="es-nombre">Jorge Guzmán Valencia</span><span class="es-mote">“Georgi”</span></li>
-<li class="es-card"><span class="es-num">31</span><img class="es-foto" src="fotos/esimio.jpg" alt="Foto de Sífilis" width="104" height="104" loading="lazy" decoding="async"><span class="es-nombre">Emilio Fuentes Fabián</span><span class="es-mote">“Sífilis”</span></li>
-<li class="es-card"><span class="es-num">32</span><img class="es-foto" src="fotos/esimio.jpg" alt="Foto de Pug" width="104" height="104" loading="lazy" decoding="async"><span class="es-nombre">Emmanuel Díaz Morales</span><span class="es-mote">“Pug”</span></li>
-<li class="es-card"><span class="es-num">33</span><img class="es-foto" src="fotos/esimio.jpg" alt="Foto de Igor" width="104" height="104" loading="lazy" decoding="async"><span class="es-nombre">Brandon Humberto Martinez Ruiseco</span><span class="es-mote">“Igor”</span></li>
-<li class="es-card"><span class="es-num">34</span><img class="es-foto" src="fotos/esimio.jpg" alt="Foto de Menonita" width="104" height="104" loading="lazy" decoding="async"><span class="es-nombre">Huemant Acxel Romero Olguin</span><span class="es-mote">“Menonita”</span></li>
-<li class="es-card"><span class="es-num">35</span><img class="es-foto" src="fotos/esimio.jpg" alt="Foto de Tizoc" width="104" height="104" loading="lazy" decoding="async"><span class="es-nombre">David Pérez García</span><span class="es-mote">“Tizoc”</span></li>
-</ol>
+<a class="es-banner-btn" href="esimios.html">Ver a los ESIMIOS <svg class="w-[15px] h-[15px]" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+</div>
 </div>
 </section>
+
 <!-- GALERÍA -->
 <section class="py-28 bg-obsidian hairline-b relative" id="galeria">
 <div class="max-w-7xl mx-auto px-6">
@@ -708,6 +683,7 @@ aside[aria-label="Aviso institucional"] *{font-size:11px!important;letter-spacin
 <li><a class="hover:text-ivory transition-colors" href="#galeria">Galería</a></li>
 <li><a class="hover:text-ivory transition-colors" href="#presentaciones">Certámenes</a></li>
 <li><a class="hover:text-ivory transition-colors" href="#contacto">Contrataciones</a></li>
+<li><a class="hover:text-ivory transition-colors" href="esimios.html">ESIMIOS</a></li>
 <li><a class="hover:text-ivory transition-colors" href="#preguntas">Preguntas frecuentes</a></li>
 </ul>
 </div>
